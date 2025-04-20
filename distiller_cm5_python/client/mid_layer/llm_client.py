@@ -343,8 +343,7 @@ class LLMClient:
         self,
         messages: List[Dict[str, Any]],
         tools: Optional[List[Dict[str, Any]]] = None,
-        callback: Optional[Callable[[str], None]] = lambda x: print(f"\033[94m{x}\033[0m")
-    ) -> Dict[str, Any]:
+        callback: Optional[Callable[[str], None]] = None) -> Dict[str, Any]:
         """Get a non-streaming response from the /chat/completions endpoint."""
         logger.info(f"LLMClient.get_chat_completion_response ===== SENDING REQUEST TO LLM ({self.provider_type}) =====")
         start_time_req = time.time() # Use time directly here

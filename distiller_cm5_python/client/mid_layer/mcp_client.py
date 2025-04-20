@@ -203,7 +203,7 @@ class MCPClient:
                     tool_result_content
                 )
 
-    async def process_query(self, query: str , callback: Callable[[str], None] = lambda x: print(f"\033[94m{x}\033[0m")) -> None:
+    async def process_query(self, query: str , callback: Callable[[str], None] = lambda x: print(f"\033[94m{x}\033[0m",end="")) -> None:
         """Process a user query, handle LLM calls, tool execution, and streaming.
 
         Yields:
@@ -233,8 +233,7 @@ class MCPClient:
                 if use_stream_this_call:
                     logger.info("Initiating streaming LLM call...")
                     response = await self.llm_provider.get_chat_completion_streaming_response(
-                        messages, self.available_tools, callback=callback
-                    )
+                        messages, self.available_tools, callback)
                 else: # Use non-streaming call
                     logger.info("Initiating non-streaming LLM call...")
                     response = await self.llm_provider.get_chat_completion_response(messages, self.available_tools)
